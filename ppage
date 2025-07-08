@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MagicTryOn</title>
+  <!-- 引入样式文件 -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://raw.githubusercontent.com/Andromeda831/hyp.io/refs/heads/main/%E7%BE%8E%E8%A7%82.css">
+ <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 0 20px;
+      color: #333;
+    }
+   header {
+  text-align: center; /* 标题居中，和原网页一致 */
+  margin-bottom: 40px;
+}
+    
+    
+    header h1 {
+      font-size: 86px;
+      background: linear-gradient(90deg, rgb(122, 125, 218), rgb(231,188,198));
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+    }
+    
+    header p {
+      font-size: 18px;
+      color: #666;
+    }
+    
+    .authors {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .names {
+      margin-bottom: 15px;
+    }
+    
+    .author-link {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 16px;
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .author-link:hover {
+      text-decoration: underline;
+    }
+    
+    .org {
+      margin-bottom: 10px;
+    }
+    
+    .org img {
+      height: 30px;
+      margin-top: 10px;
+    }
+    
+    .symbols {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .links {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: rgb(239,164,132);
+      color: white;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: rgb(182,118,108);
+      transform: scale(1.05);
+    }
+    
+    h2 {
+      font-size: 24px;
+      color: #2c3e50;
+      margin-top: 40px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+   
+    
+    .video-item {
+      margin-bottom: 20px;
+    }
+   /* 视频容器：使用 Flexbox 布局 */
+  .video-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* 视频项之间的间距 */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 单个视频项 */
+  .video-item {
+  flex: 1 1 calc(33.333% - 20px); /* 三个视频并排，减去间距 */
+  min-width: 300px; /* 最小宽度，防止在极窄屏幕下变形 */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* 视频标签 */
+  video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px 8px 0 0;
+}
+
+/* 响应式布局：在小屏幕上显示为单列 */
+  @media (max-width: 768px) {
+  .video-item {
+    flex-basis: 100%; /* 宽度占满容器 */
+  }
+}
+
+    .abstract, .method {
+      text-align: center;
+      line-height: 1.6;
+    }
+    .method-figure {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .method-figure img {
+      max-width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    
+    .bibtex {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+    
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+  
+<body>
+  <!-- 顶部标题 -->
+  <header>
+    <h1>MagicTryOn</h1>
+    <p>Diffusion Transformer for Video Virtual Try-on</p>
+  </header>
+
+  <!-- 作者、机构 -->
+  <section class="authors">
+    <div class="names">
+    <a href="https://example.com/author1" class="author-link">Author 1†</a>
+    <a href="https://example.com/author2" class="author-link">Author 2†</a>
+    <a href="https://example.com/author3" class="author-link">Author 3†</a>
+    <a href="https://github.com/Andromeda831" class="author-link">Danru Yang</a>
+    </div>
+    <div class="org">
+      <p>Vivo Camera Research</p>
+      <img src="images/vivo-logo.png" alt="Vivo Logo"> <!-- Logo -->
+    </div>
+    <div class="symbols">
+      <p>† Equal Contribution | * Corresponding Author</p>
+    </div>
+  </section>
+  <!-- 论文链接 -->
+  <section class="links">
+    <a href="#" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
+    <a href="#" class="btn"><i class="fas fa-file-alt"></i> ArXiv</a>
+    <a href="https://github.com/Andromeda831" class="btn"><i class="fab fa-github"></i> Code</a>
+    
+  </section>
+  <!-- 视频 -->
+ <section class="videos">
+    <h2>Videos</h2>
+    <div class="video-container">
+       <!-- 视频 1 -->
+      <div class="video-item">
+        <video controls width="100%">
+          <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/1.mp4">
+          
+        </video>
+      </div>
+      <!-- 视频 2 -->
+      <div class="video-item">
+        <video controls width="100%">
+          <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/2.mp4">
+          
+        </video>
+      </div>
+      <!-- 视频 3 -->
+      <div class="video-item">
+        <video controls width="100%">
+          <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/3.mp4">
+          
+        </video>
+      </div>
+
+   <!-- 视频 4 -->
+    <div class="video-item">
+      <video controls width="100%">
+        <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/4.mp4">
+        
+      </video>
+    </div>
+    <!-- 视频 5 -->
+    <div class="video-item">
+      <video controls width="100%">
+        <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/5.mp4">
+        
+      </video>
+    </div>
+    <!-- 视频 6 -->
+    <div class="video-item">
+      <video controls width="100%">
+        <source src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/6.mp4">
+        
+      </video>
+    </div>
+  </div>
+  </section>
+
+
+    <div class="video-item">
+      <video 
+        src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/1.mp4" 
+        controls 
+        width="100%"
+        poster="https://raw.githubusercontent.com/Andromeda831/huanyi/main/1.png"
+      </video>
+      
+    </div>
+    
+    <div class="video-item">
+      <video 
+        src="https://raw.githubusercontent.com/Andromeda831/huanyi/main/2.mp4" 
+        controls 
+        width="100%"
+        poster="https://raw.githubusercontent.com/Andromeda831/huanyi/main/2.png"
+      </video>
+      
+    </div>
+
+</section>
+  <!--  摘要 -->
+  <section class="abstract">
+    <h2>Abstract</h2>
+    <p>（摘要）</p>
+  </section>
+
+  <!-- 方法 -->
+  <section class="method">
+    <h2>Method</h2>
+    <div class="method-figure">
+      <img src="images/method.png" alt="Method Flowchart"> <!-- 方法流程图 -->
+    </div>
+    <p>（方法说明）</p>
+  </section>
+
+ 
+
+
+
+
+  <section class="links">
+    <div class="bibtex">
+      <h3>BibTeX</h3>
+      <pre>（BibTeX代码）</pre>
+    </div>
+  </section>
+  <!-- 底部 -->
+  <footer>
+    <p>© 2025 Vivo Camera Research</p>
+  </footer>
+</body>
+</html>
